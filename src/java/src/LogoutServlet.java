@@ -5,10 +5,8 @@
  */
 package src;
 
-import bean.ComplaintData;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,27 +18,29 @@ import javax.servlet.http.HttpSession;
  *
  * @author kanu
  */
-@WebServlet(name = "CreateSessionServlet", urlPatterns = {"/CreateSessionServlet"})
-public class CreateSessionServlet extends HttpServlet {
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
+public class LogoutServlet extends HttpServlet {
 
-
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        ArrayList<ComplaintData> ids=new ArrayList<ComplaintData>();
-        ComplaintData c1=new ComplaintData("1234");
-        ComplaintData c2=new ComplaintData("5678");
-        ids.add(c1);
-        ids.add(c2);
-        response.setContentType("text/html;charset=UTF-8");
-        
-        HttpSession session=request.getSession(true);
-        UserStaticInfo.userName=request.getParameter("name");
-        session.setAttribute("userName",request.getParameter("name"));  
-       
-        //request.setAttribute(userName, userName);
-        request.setAttribute("ids", ids);
+        HttpSession session = request.getSession(false);
+        if(session!=null)
+        {
+            session.removeAttribute("userName");
+            session.invalidate();
+            UserStaticInfo.userName=null;
+            
+        }
         response.sendRedirect("GetSession");
-        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

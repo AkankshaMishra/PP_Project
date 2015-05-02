@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package register;
+package src;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,28 +18,22 @@ import javax.servlet.http.HttpSession;
  *
  * @author kanu
  */
-@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
-public class LogoutServlet extends HttpServlet {
+@WebServlet(name = "GetSession", urlPatterns = {"/GetSession"})
+public class GetSession extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        if(session!=null)
+        throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        HttpSession session=request.getSession();  
+        String id1=(String)session.getAttribute("userName");
+        if(request.getSession(false)==null || UserStaticInfo.userName==null)
         {
-            session.removeAttribute("userName");
-            session.invalidate();
-            
+            response.sendRedirect("index.jsp");
         }
-        response.sendRedirect("index.jsp");
+        else
+        {
+        request.getRequestDispatcher("welcomeStruts.jsp").forward(request, response);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
