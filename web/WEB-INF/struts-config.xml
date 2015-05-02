@@ -25,6 +25,7 @@
         name="RegisterBean" 
         scope="session"
         input="/welcomeStruts.jsp">
+        <forward name="success"  path="/success.jsp"/>    
         </action>
         <action path="/registercar"
         type="register.RegisterCarAction" 

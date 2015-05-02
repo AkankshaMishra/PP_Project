@@ -32,6 +32,14 @@
 
         <script src="assets/js/chart-master/Chart.js"></script>
         <script type="text/javascript">
+           $(function () {
+               $('#closeButton').click(function () {
+                   $('#showComplaintsdetail').hide();
+                   return false;
+               });
+           });
+       </script>
+        <script type="text/javascript">
                $(function () {
                    $('#plusOne').click(function () {
                        
@@ -52,11 +60,36 @@
                    });
            
        </script>
+    <script type="text/javascript">
+    function getPlusCount(id)
+    {
+        
+        
+        $.ajax(
+                           {
+                               type: "get",
+                               url: 'PlusOneServlet',
+                               success: function (result)
+                               {
+                                   var ele = document.getElementById(id);
+                                   ele.innerHTML = "";
+                                   ele.innerHTML += "<b>Total Count:" + id +" <br/>  "+'${userName}'+ "</b>";
+                                   
+                               }
+                           });
+        return "#";
+    }
+       </script>   
+       
        
        <script type="text/javascript">
     function getMore(id)
     {
-        alert(id);
+        var ele=document.getElementById("temporary");
+        ele.innerHTML="";
+        var ele1=document.getElementById("showComplaintsdetail")
+        ele1.style.display="block";
+        ele.innerHTML+=''+id;
         return "#";
     }
        </script>
@@ -78,7 +111,7 @@
             <header class="header black-bg">
 
                 <!--logo start-->
-                <a href="index.html" class="logo"><b><bean:message key="welcome.title.complaint"/></b></a>
+                <a href="index.jsp" class="logo"><b><bean:message key="welcome.title.complaint"/></b></a>
                 
                 <!--logo end-->
                 <div class="nav notify-row" id="top_menu">
@@ -207,7 +240,15 @@
                             </div>
                         </div>
 
-
+                        <div id="showComplaintsdetail">
+                                <div id="permanent">
+                                    <input type="button" name="close" id="closeButton" value="X" style="float:right"/>
+                                </div>    
+                                <div id="temporary">
+                                   
+                                </div>
+                                
+                            </div>
                         <!-- **********************************************************************************************************************************************************
                         RIGHT SIDEBAR CONTENT
                         *********************************************************************************************************************************************************** -->                  
@@ -223,8 +264,8 @@
                                 <div class="details">
                                     <p><muted>2 Minutes Ago</muted><br/>
                                     <a href="#">James Brown</a> subscribed to your newsletter.
-                                    <a href="#" id="plusOne"><b>+1</b></a>  <a href="#" onClick="javascript:document.location.href=getMore(1234);"><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;more</b></a>
-                                    <p id="plusData"></p>
+                                    <a href="#" onClick="javascript:document.location.href=getPlusCount(1234);"><b>+1</b></a>  <a href="#" onClick="javascript:document.location.href=getMore(1234);"><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;more</b></a>
+                                    <p id="1234"></p>
                                     </p>
                                 </div>
                             </div>
@@ -234,47 +275,17 @@
                                     <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
                                 </div>
                                 <div class="details">
-                                    <p><muted>3 Hours Ago</muted><br/>
-                                    <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
-                                    
-                                </p>
-                                </div>
-                            </div>
-                            <!-- Third Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>7 Hours Ago</muted><br/>
-                                    <a href="#">Brandon Page</a> purchased a year subscription.<br/>
+                                    <p><muted>2 Minutes Ago</muted><br/>
+                                    <a href="#">James Brown</a> subscribed to your newsletter.
+                                    <a href="#" onClick="javascript:document.location.href=getPlusCount(5678);"><b>+1</b></a>  <a href="#" onClick="javascript:document.location.href=getMore(5678);"><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;more</b></a>
+                                    <p id="5678"></p>
                                     </p>
                                 </div>
                             </div>
-                            <!-- Fourth Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>11 Hours Ago</muted><br/>
-                                    <a href="#">Mark Twain</a> commented your post.<br/>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Fifth Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>18 Hours Ago</muted><br/>
-                                    <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                                    </p>
-                                </div>
-                            </div>
+                            
+                            
                         </div>
-                        <div class="col-lg-3 ds" style="margin-left: 3%;margin-top: 2%">
+                        <div class="col-lg-3 ds" style="margin-left: 3%;margin-top: 2%;height: 500px;overflow: auto">
                             <!--COMPLETED ACTIONS DONUTS CHART-->
                             <h3>YOUR COMPLAINTS</h3>
 
@@ -285,54 +296,13 @@
                                 </div>
                                 <div class="details">
                                     <p><muted>2 Minutes Ago</muted><br/>
-                                    <a href="#">James Brown</a> subscribed to your newsletter.<br/>
+                                    <a href="#">James Brown</a> subscribed to your newsletter.
+                                      <a href="#" onClick="javascript:document.location.href=getMore(1234);"><b>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp;more</b></a>
+                                    <p id="plusData"></p>
                                     </p>
                                 </div>
-                            </div>
-                            <!-- Second Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>3 Hours Ago</muted><br/>
-                                    <a href="#">Diana Kennedy</a> purchased a year subscription.<br/>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Third Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>7 Hours Ago</muted><br/>
-                                    <a href="#">Brandon Page</a> purchased a year subscription.<br/>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Fourth Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>11 Hours Ago</muted><br/>
-                                    <a href="#">Mark Twain</a> commented your post.<br/>
-                                    </p>
-                                </div>
-                            </div>
-                            <!-- Fifth Action -->
-                            <div class="desc">
-                                <div class="thumb">
-                                    <span class="badge bg-theme"><i class="fa fa-clock-o"></i></span>
-                                </div>
-                                <div class="details">
-                                    <p><muted>18 Hours Ago</muted><br/>
-                                    <a href="#">Daniel Pratt</a> purchased a wallet in your store.<br/>
-                                    </p>
-                                </div>
-                            </div>
+                            </div>                            
+                            
                         </div>
                     </div>
                 </section>

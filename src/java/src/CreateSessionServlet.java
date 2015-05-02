@@ -42,7 +42,7 @@ public class CreateSessionServlet extends HttpServlet {
         }
         //request.setAttribute(userName, userName);
         request.setAttribute("ids", ids);
-        request.getRequestDispatcher("adminPortal.jsp").forward(request, response);
+        request.getRequestDispatcher("welcomeStruts.jsp").forward(request, response);
         
     }
 

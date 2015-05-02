@@ -37,7 +37,7 @@
                         .execute(function (resp)
                         {
                             // Shows user email
-                            window.location = "/OneStopPortal/CreateSessionServlet?name=" + resp.name;
+                            window.location = "/OneStopPortal/CreateSessionServlet?name=" + resp.email;
                             console.log(resp.email);
                         });
             });
@@ -48,7 +48,7 @@
             'callback': loginFinished,
             'approvalprompt': 'force',
             'clientid': '970036490678-c0i2m4bm28haugtico98km6mn18dlv9v.apps.googleusercontent.com',
-            'scope': 'https://www.googleapis.com/auth/userinfo.profile',
+            'scope': 'https://www.googleapis.com/auth/userinfo.email',
             'cookiepolicy': 'single_host_origin'
         };
 
